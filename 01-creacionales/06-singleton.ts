@@ -9,3 +9,71 @@
  *
  * https://refactoring.guru/es/design-patterns/singleton
  */
+
+class DragonBalls {
+  static instance: DragonBalls;
+
+  private ballsCollected: number = 0;
+
+  private constructor() {
+    this.ballsCollected = 0;
+  }
+
+  public static getInstance(): DragonBalls {
+    if (!DragonBalls.instance) {
+      DragonBalls.instance = new DragonBalls();
+    }
+
+    return DragonBalls.instance;
+  }
+
+  collectBall(): void {
+    if (this.ballsCollected < 7) {
+      this.ballsCollected++;
+      console.log(
+        `¡Has recogido la bola del dragón número ${this.ballsCollected}!`,
+      );
+      return;
+    }
+
+    console.log(
+      "¡Ya has recogido las 7 bolas del dragón! Invoca a Shenlong para pedir tu deseo.",
+    );
+  }
+
+  summonShenlong(): void {
+    if (this.ballsCollected === 7) {
+      console.log("¡Has invocado a Shenlong! ¿Cuál es tu deseo?");
+      this.ballsCollected = 0; // Reiniciar las bolas después de invocar a Shenlong
+      return;
+    }
+
+    console.log(
+      `Aún te faltan ${
+        7 - this.ballsCollected
+      } bolas del dragón para invocar a Shenlong.`,
+    );
+  }
+}
+
+function main() {
+  const gokuDragonBalls = DragonBalls.getInstance();
+
+  gokuDragonBalls.collectBall();
+  gokuDragonBalls.collectBall();
+  gokuDragonBalls.collectBall();
+
+  gokuDragonBalls.summonShenlong();
+
+  const vegetaDragonBalls = DragonBalls.getInstance();
+
+  vegetaDragonBalls.collectBall();
+  vegetaDragonBalls.collectBall();
+  vegetaDragonBalls.collectBall();
+  vegetaDragonBalls.collectBall();
+
+  gokuDragonBalls.summonShenlong();
+  vegetaDragonBalls.summonShenlong();
+}
+
+main();

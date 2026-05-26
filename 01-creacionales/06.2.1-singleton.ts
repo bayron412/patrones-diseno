@@ -9,3 +9,15 @@
  *
  * https://refactoring.guru/es/design-patterns/singleton
  */
+
+import { COLORS } from "../helpers/colors.ts";
+import { configManager } from "./singleton/config-manager.ts";
+
+configManager.setConfig("appName", "MyApp");
+configManager.setConfig("version", "1.0.0");
+configManager.setConfig("apiUrl", "https://api.myapp.com");
+
+console.log(configManager.getConfig("appName"));
+
+console.log(configManager.getAllConfigs());
+
