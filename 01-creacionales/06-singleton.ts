@@ -10,11 +10,10 @@
  * https://refactoring.guru/es/design-patterns/singleton
  */
 
-import { COLORS } from '../helpers/colors.ts';
-
 class DragonBalls {
-  private static instance: DragonBalls;
-  private ballsCollected: number;
+  static instance: DragonBalls;
+
+  private ballsCollected: number = 0;
 
   private constructor() {
     this.ballsCollected = 0;
@@ -23,7 +22,6 @@ class DragonBalls {
   public static getInstance(): DragonBalls {
     if (!DragonBalls.instance) {
       DragonBalls.instance = new DragonBalls();
-      console.log('%cLas pelotas del Dragón han sido creadas!', COLORS.green);
     }
 
     return DragonBalls.instance;
@@ -33,25 +31,27 @@ class DragonBalls {
     if (this.ballsCollected < 7) {
       this.ballsCollected++;
       console.log(
-        `Pelota recolectada. Total de esferas: ${this.ballsCollected}`
+        `¡Has recogido la bola del dragón número ${this.ballsCollected}!`,
       );
       return;
     }
 
     console.log(
-      'Ya se han recolectado las 7 esferas del Dragón! Invoca a Shenlong'
+      "¡Ya has recogido las 7 bolas del dragón! Invoca a Shenlong para pedir tu deseo.",
     );
   }
 
-  summonShenlong() {
+  summonShenlong(): void {
     if (this.ballsCollected === 7) {
-      console.log('Shenlong ha sido invocado, Pide tu deseo!');
-      this.ballsCollected = 0;
+      console.log("¡Has invocado a Shenlong! ¿Cuál es tu deseo?");
+      this.ballsCollected = 0; // Reiniciar las bolas después de invocar a Shenlong
       return;
     }
 
     console.log(
-      `\nAún faltan ${7 - this.ballsCollected} pelotas para invocar a Shenlong`
+      `Aún te faltan ${
+        7 - this.ballsCollected
+      } bolas del dragón para invocar a Shenlong.`,
     );
   }
 }
@@ -66,13 +66,13 @@ function main() {
   gokuDragonBalls.summonShenlong();
 
   const vegetaDragonBalls = DragonBalls.getInstance();
+
   vegetaDragonBalls.collectBall();
   vegetaDragonBalls.collectBall();
   vegetaDragonBalls.collectBall();
   vegetaDragonBalls.collectBall();
 
   gokuDragonBalls.summonShenlong();
-
   vegetaDragonBalls.summonShenlong();
 }
 

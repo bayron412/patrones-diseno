@@ -13,21 +13,20 @@
  * https://refactoring.guru/es/design-patterns/builder
  */
 
-import { COLORS } from '../helpers/colors.ts';
-
 class Computer {
-  public cpu: string = 'cpu - not defined';
-  public ram: string = 'ram - not defined';
-  public storage: string = 'storage - not defined';
+  public cpu: string = "cpu - not defined";
+  public ram: string = "ram - not defined";
+  public storage: string = "storage - not defined";
   public gpu?: string;
 
   displayConfiguration() {
-    console.log(`Configuración de la computadora
-      CPU: ${this.cpu}  
-      RAM: ${this.ram}  
-      Almacenamiento: ${this.storage}  
-      GPU: ${this.gpu ?? 'No tiene GPU'}  
-      `);
+    console.log(`
+        Configuracion de la comnputadora:
+        CPU: ${this.cpu},
+        RAM: ${this.ram},
+        Storage: ${this.storage},
+        GPU: ${this.gpu ?? "No tiene GPU"}
+    `);
   }
 }
 
@@ -58,30 +57,30 @@ class ComputerBuilder {
     return this;
   }
 
-  build() {
+  build(): Computer {
     return this.computer;
   }
 }
 
 function main() {
-  const basicComputer: Computer = new ComputerBuilder()
-    .setCPU('Intel Core 2 Dúo')
-    .setRAM('4GB')
-    .setStorage('256GB')
+  const basicBuilder: Computer = new ComputerBuilder()
+    .setCPU("Intel Core 2 Duo")
+    .setRAM("4GB")
+    .setStorage("256GB")
     .build();
 
-  console.log('%cComputadora básica:', COLORS.blue);
-  basicComputer.displayConfiguration();
+  console.log(`Basic Computer:`);
+  basicBuilder.displayConfiguration();
 
-  const gamingComputer = new ComputerBuilder()
-    .setCPU('Intel i9')
-    .setRAM('64GB')
-    .setStorage('1TB M2')
-    .setGPU('Nvidia RTX 5090')
+  const gamingBuilder: Computer = new ComputerBuilder()
+    .setCPU("AMD Ryzen 9 5900X")
+    .setRAM("32GB")
+    .setStorage("1TB NVMe SSD")
+    .setGPU("NVIDIA GeForce RTX 3080")
     .build();
 
-  console.log('%c\nComputadora gamer\n', COLORS.cyan);
-  gamingComputer.displayConfiguration();
+  console.log(`Gaming Computer:`);
+  gamingBuilder.displayConfiguration();
 }
 
 main();

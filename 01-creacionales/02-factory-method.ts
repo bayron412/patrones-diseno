@@ -10,10 +10,9 @@
  * * de objetos que debe crear.
  *
  * https://refactoring.guru/es/design-patterns/factory-method
- *
  */
 
-import { COLORS } from '../helpers/colors.ts';
+import { COLORS } from "../helpers/colors.ts";
 
 interface Hamburger {
   prepare(): void;
@@ -21,19 +20,19 @@ interface Hamburger {
 
 class ChickenHamburger implements Hamburger {
   prepare(): void {
-    console.log('Preparando una hamburguesa de %cpollo', COLORS.yellow);
+    console.log(`Preparando hamburguesa de pollo`, COLORS.brown);
   }
 }
 
 class BeefHamburger implements Hamburger {
   prepare(): void {
-    console.log('Preparando una hamburguesa de %cres', COLORS.brown);
+    console.log(`Preparando hamburguesa de res`, COLORS.brown);
   }
 }
 
-class BeanHamburger implements Hamburger {
+class VeggieHamburger implements Hamburger {
   prepare(): void {
-    console.log('Preparando una hamburguesa de %cfrijol', COLORS.orange);
+    console.log(`Preparando hamburguesa vegetariana`, COLORS.green);
   }
 }
 
@@ -58,9 +57,9 @@ class BeefRestaurant extends Restaurant {
   }
 }
 
-class BeanRestaurant extends Restaurant {
+class VeggieRestaurant extends Restaurant {
   override createHamburger(): Hamburger {
-    return new BeanHamburger();
+    return new VeggieHamburger();
   }
 }
 
@@ -68,24 +67,24 @@ function main() {
   let restaurant: Restaurant;
 
   const burgerType = prompt(
-    '¿Qué tipo de hamburguesa quieres? ( chicken/beef/bean )'
-  );
+    "Que Tipo de hamburguesa deseas? (chicken/beef/veggie)",
+  ); // Esto podría venir de una entrada del usuario o de una configuración
 
   switch (burgerType) {
-    case 'chicken':
+    case "chicken":
       restaurant = new ChickenRestaurant();
       break;
 
-    case 'beef':
+    case "beef":
       restaurant = new BeefRestaurant();
       break;
 
-    case 'bean':
-      restaurant = new BeanRestaurant();
+    case "veggie":
+      restaurant = new VeggieRestaurant();
       break;
 
     default:
-      throw new Error('Opción no válida');
+      throw new Error("Tipo de hamburguesa no válido");
   }
 
   restaurant.orderHamburger();

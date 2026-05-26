@@ -1,5 +1,12 @@
 {
-  "cSpell.words": [
-    "paypal"
-  ]
+  "files.trimTrailingWhitespace": true,
+  "editor.formatOnSave": false,
+  "[typescript]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  },
+  "[typescriptreact]": {
+    "editor.tabSize": 2,
+    "editor.insertSpaces": true
+  }
 }
