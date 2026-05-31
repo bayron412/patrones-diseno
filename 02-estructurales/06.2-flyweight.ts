@@ -36,22 +36,26 @@ class BulletType {
 
 // 2. Fábrica de Flyweights - BulletTypeFactory
 class BulletTypeFactory {
+
   private bulletTypes: Record<string, BulletType> = {};
 
   getBulletType(name: string, damage: number, color: string): BulletType {
-    // TODO: Implementar un método para obtener un tipo de bala
-    // Si no existe el tipo de bala, crearlo y guardarlo en la lista de tipos de bala
-    // Si existe el tipo de bala, devolverlo
+    
+    const key = `${name}-${damage}-${color}`;
+    
+    if (!this.bulletTypes[key]) {
+        console.log(`%cCreating a New Bullet Type`, COLORS.red);
+        this.bulletTypes[key] = new BulletType(name, damage, color);
+    }
 
-    // TODO: El key, debería de ser un identificador único para cada tipo de bala
-    // name-damage-color
+    return this.bulletTypes[key];
 
-    throw new Error('Method not implemented.');
   }
 }
 
 // 3. Clase que representa una Bala - Bullet
 class Bullet {
+
   private x: number;
   private y: number;
   private direction: number;
@@ -75,11 +79,12 @@ class Bullet {
 
     console.log(text, COLORS.green, COLORS.white);
   }
+
 }
 
 // 4. Sistema de Disparos - ShootingSystem
-
 class ShootingSystem {
+
   private bullets: Bullet[] = [];
   private factory: BulletTypeFactory;
 
@@ -104,11 +109,13 @@ class ShootingSystem {
   getBulletCount(): number {
     return this.bullets.length;
   }
+
 }
 
 // 5. Código Cliente para probar el Flyweight
 
 function main() {
+  
   const factory = new BulletTypeFactory();
   const shootingSystem = new ShootingSystem(factory);
 
@@ -123,6 +130,7 @@ function main() {
     `Total de balas disparadas: %c${shootingSystem.getBulletCount()}\n`,
     COLORS.yellow
   );
+
 }
 
 main();
