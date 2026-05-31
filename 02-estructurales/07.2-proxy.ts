@@ -20,6 +20,7 @@ interface Document {
 
 // 2. Clase que representa el Documento Confidencial - ConfidentialDocument
 class ConfidentialDocument implements Document {
+  
   private content: string;
 
   constructor(content: string) {
@@ -29,36 +30,36 @@ class ConfidentialDocument implements Document {
   displayContent(): void {
     console.log(`Contenido del documento: \n%c${this.content}\n`, COLORS.blue);
   }
+
 }
 
 // 3. Clase Proxy - DocumentProxy
 class DocumentProxy implements Document {
+
   private document: Document;
   private mustHaveRoles: string[];
 
-  // TODO: private mustHaveRoles: string[]; //
-
   constructor(document: Document, mustHaveRoles: string[] = []) {
-    this.document = document;
+    this.document = document
     this.mustHaveRoles = mustHaveRoles;
   }
 
   displayContent(user: User): void {
-    if (this.mustHaveRoles.includes(user.getRole())) {
-      this.document.displayContent(user);
+
+    if (!this.mustHaveRoles.includes(user.getRole())) {
+      console.log(`%cAcceso denegado. ${user.getName()}, no tienes permisos suficientes para ver este documento.`, COLORS.red);
       return;
     }
 
-    // if (user.getRole() === 'admin') {
-    //   this.document.displayContent(user);
+    // if (user.getRole() === 'user') {
+    //   console.log(`%cAcceso denegado. ${user.getName()}, no tienes permisos suficientes para ver este documento.`, COLORS.red);
     //   return;
     // }
 
-    console.log(
-      `%cAcceso denegado. ${user.getName()}, no tienes permisos suficientes para ver este documento.`,
-      COLORS.red
-    );
+    this.document.displayContent(user);
+
   }
+
 }
 
 // 4. Clase que representa al Usuario - User
@@ -83,9 +84,11 @@ class User {
 // 5. Código Cliente para probar el Proxy
 
 function main() {
+
   const confidentialDoc = new ConfidentialDocument(
     'Este es el contenido confidencial del documento.'
   );
+
   const proxy = new DocumentProxy(confidentialDoc, ['admin']);
 
   const user1 = new User('Juan', 'user');

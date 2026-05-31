@@ -1,17 +1,19 @@
 import { COLORS } from '../../helpers/colors.ts';
 
 export class LocalLogger {
+
   constructor(private file: string) {}
 
   writeLog(msg: string): void {
-    console.log(`[${this.file} Log] ${msg}`);
+    console.log(`[${this.file} Log] %c${msg}`, COLORS.green);
   }
 
   writeError(msg: string): void {
-    console.log(`[${this.file} error] %c${msg}`, COLORS.red);
+    console.error(`[${this.file} Error] %c${msg}`, COLORS.red);
   }
 
   writeWarning(msg: string): void {
-    console.log(`[${this.file} warning] %c${msg}`, COLORS.yellow);
+    console.warn(`[${this.file} Warning] %c${msg}`, COLORS.yellow);
   }
+
 }

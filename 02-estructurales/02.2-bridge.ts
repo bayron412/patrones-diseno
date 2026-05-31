@@ -41,6 +41,7 @@ class PushNotificationChannel implements NotificationChannel {
 // Define la propiedad `channel` y el método `notify`
 
 abstract class Notification {
+
   protected channel: NotificationChannel;
 
   constructor(channel: NotificationChannel) {
@@ -49,11 +50,13 @@ abstract class Notification {
 
   abstract notify(message: string): void;
   abstract setChannel(channel: NotificationChannel): void;
+
 }
 
 // 4. Clases Concretas de Notificaciones
 
 class AlertNotification extends Notification {
+
   override notify(message: string): void {
     console.log('\n%cNotificación de Alerta:', COLORS.red);
     this.channel.send(message);
@@ -62,20 +65,24 @@ class AlertNotification extends Notification {
   override setChannel(channel: NotificationChannel): void {
     this.channel = channel;
   }
+
 }
 
 class ReminderNotification extends Notification {
-  notify(message: string): void {
+
+  override notify(message: string): void {
     console.log('\n%cNotificación de Recordatorio:', COLORS.blue);
     this.channel.send(message);
   }
 
-  setChannel(channel: NotificationChannel): void {
+  override setChannel(channel: NotificationChannel): void {
     this.channel = channel;
   }
+
 }
 
 class PushNotification extends Notification {
+
   override notify(message: string): void {
     console.log('\n%cNotificación de Push:', COLORS.green);
     this.channel.send(message);
@@ -84,9 +91,12 @@ class PushNotification extends Notification {
   override setChannel(channel: NotificationChannel): void {
     this.channel = channel;
   }
+
 }
 
 // 5. Código Cliente para Probar el Bridge
+
+// TODO: Toda la función main debe de ejecutarse sin errores, sin modificaciones
 // Deben de implementar todo lo que haga falta en las clases anteriores
 function main() {
   // Crear una notificación de alerta usando el canal de correo electrónico

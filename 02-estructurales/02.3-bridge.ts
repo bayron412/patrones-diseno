@@ -42,6 +42,7 @@ class PushNotificationChannel implements NotificationChannel {
 // Define la propiedad `channel` y el método `notify`
 
 abstract class Notification {
+
   protected channels: NotificationChannel[];
 
   constructor(channels: NotificationChannel[]) {
@@ -50,35 +51,34 @@ abstract class Notification {
 
   abstract notify(message: string): void;
   abstract addChannel(channel: NotificationChannel): void;
+
 }
 
 class AlertNotification extends Notification {
+
   override notify(message: string): void {
-    console.log('\n%cNotificación de alerta', COLORS.red);
-    this.channels.forEach((channel) => channel.send(message));
+    console.log('\n%cNotificación de Alerta:', COLORS.red);
+    this.channels.forEach(channel => channel.send(message));
   }
 
   override addChannel(channel: NotificationChannel): void {
     this.channels.push(channel);
   }
+
 }
 
 function main() {
-  const channels = [
+
+  const channels: NotificationChannel[] = [
     new EmailChannel(),
     new SMSChannel(),
-    new PushNotificationChannel(),
-    new PushNotificationChannel(),
-    new PushNotificationChannel(),
-    new SMSChannel(),
-    new EmailChannel(),
+    new PushNotificationChannel()
   ];
 
   const alert = new AlertNotification(channels);
+  alert.notify('Nueva alerta de seguridad: alguien intentó iniciar sesión en tu cuenta');
 
-  alert.notify('Alguien en frente de la casa');
-
-  console.log('\n');
 }
 
 main();
+

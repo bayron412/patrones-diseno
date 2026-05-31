@@ -25,6 +25,7 @@ interface MenuComponent {
 // 2. Clase MenuItem
 // Representa un ítem individual del menú, como un platillo o una bebida.
 class MenuItem implements MenuComponent {
+
   private name: string;
   private price: number;
 
@@ -39,34 +40,41 @@ class MenuItem implements MenuComponent {
       COLORS.green
     );
   }
+
 }
 
 // 3. Clase MenuCategory
 // Representa una categoría de menú que puede contener otros ítems o subcategorías.
 class MenuCategory implements MenuComponent {
-  private name: string;
-  private items: MenuComponent[] = [];
 
-  constructor(name: string) {
+  private name: string;
+  private items: MenuComponent[] = []
+
+  constructor(name: string, items: MenuComponent[] = []) {
     this.name = name;
+    this.items = items;
   }
 
   add(item: MenuComponent | MenuComponent[]): void {
+
     if (Array.isArray(item)) {
       this.items.push(...item);
-      return;
+    }
+    else {
+      this.items.push(item);
     }
 
-    this.items.push(item);
   }
 
   showDetails(indent: string = ''): void {
     console.log(`%c${indent}+ ${this.name}`, COLORS.blue);
-    this.items.forEach((item) => item.showDetails(indent + ' '));
+    this.items.forEach((item) => item.showDetails(indent + '  '));
   }
 }
 
 // 4. Código Cliente para Probar el Composite
+// TODO: en esta función main, no deben de hacer nada, al ejecutarla,
+// Deben de ver la gráfica correcta del menú
 function main() {
   // Crear ítems individuales
   const salad = new MenuItem('Ensalada', 5.99);
@@ -75,7 +83,6 @@ function main() {
   const soda = new MenuItem('Refresco', 2.5);
   const dessert = new MenuItem('Pastel de chocolate', 6.5);
   const coffee = new MenuItem('Café', 1.99);
-  const te = new MenuItem('Te', 0.99);
 
   // Crear categorías de menú y añadir ítems
   const appetizers = new MenuCategory('Entradas');
@@ -86,16 +93,8 @@ function main() {
   mainCourse.add(steak);
 
   const beverages = new MenuCategory('Bebidas');
-
-  const hotBeverages = new MenuCategory('Calientes');
-  const coldBeverages = new MenuCategory('Frías');
-
-  coldBeverages.add(soda);
-
-  hotBeverages.add(coffee);
-  hotBeverages.add(te);
-
-  beverages.add([coldBeverages, hotBeverages]);
+  beverages.add(soda);
+  beverages.add(coffee);
 
   const desserts = new MenuCategory('Postres');
   desserts.add(dessert);
@@ -110,6 +109,7 @@ function main() {
   // Mostrar la estructura completa del menú
   console.log('Menú del Restaurante:');
   mainMenu.showDetails();
+
 }
 
 main();

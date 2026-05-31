@@ -20,8 +20,8 @@ interface Character {
 
 // 2. Clase BasicCharacter
 // Representa un personaje básico sin accesorios
-// TODO: Implementar la interfaz Character
 class BasicCharacter implements Character {
+
   getDescription(): string {
     return 'Personaje básico';
   }
@@ -29,11 +29,13 @@ class BasicCharacter implements Character {
   getStats(): { attack: number; defense: number } {
     return { attack: 10, defense: 10 };
   }
+
 }
 
 // 3. Clase Decoradora CharacterDecorator
 // Actúa como base para los decoradores específicos
 abstract class CharacterDecorator implements Character {
+
   protected character: Character;
 
   constructor(character: Character) {
@@ -45,13 +47,15 @@ abstract class CharacterDecorator implements Character {
   }
 
   getStats(): { attack: number; defense: number } {
-    return this.character.getStats();
+    return this.character.getStats()
   }
+
 }
 
 // 4. Decorador Concreto HelmetDecorator
 // Añade un casco que aumenta la defensa en +5
 class HelmetDecorator extends CharacterDecorator {
+
   override getDescription(): string {
     return this.character.getDescription() + '\n * con Casco';
   }
@@ -59,12 +63,14 @@ class HelmetDecorator extends CharacterDecorator {
   override getStats(): { attack: number; defense: number } {
     const stats = this.character.getStats();
     return { attack: stats.attack, defense: stats.defense + 5 };
+
   }
 }
 
 // 5. Decorador Concreto ShieldDecorator
 // Añade un escudo que aumenta la defensa en +10
 class ShieldDecorator extends CharacterDecorator {
+
   override getDescription(): string {
     return this.character.getDescription() + '\n * con Escudo';
   }
@@ -73,6 +79,7 @@ class ShieldDecorator extends CharacterDecorator {
     const stats = this.character.getStats();
     return { attack: stats.attack, defense: stats.defense + 10 };
   }
+
 }
 
 // 6. Decorador Concreto SwordDecorator
@@ -88,9 +95,10 @@ class SwordDecorator extends CharacterDecorator {
   }
 }
 
-// TODO: Crear un nuevo decorador que añada un anillo que aumenta el ataque en +3
-// class RingDecorator ...
+// Decorador que añada un anillo que 
+// aumenta el ataque en +3
 class RingDecorator extends CharacterDecorator {
+
   override getDescription(): string {
     return this.character.getDescription() + '\n * con Anillo';
   }
@@ -99,13 +107,17 @@ class RingDecorator extends CharacterDecorator {
     const stats = this.character.getStats();
     return { attack: stats.attack + 3, defense: stats.defense };
   }
+
 }
+
+
 
 // 7. Código Cliente para Probar el Decorador
 
 function main() {
   // Crear un personaje básico
   let character: Character = new BasicCharacter();
+
   console.log('\nPersonaje inicial:', character.getDescription());
   console.log('Estadísticas:', character.getStats());
 
@@ -113,6 +125,7 @@ function main() {
   character = new HelmetDecorator(character);
   console.log('\nCon Casco:', character.getDescription());
   console.log('Estadísticas:', character.getStats());
+
 
   // Añadir un escudo al personaje
   character = new ShieldDecorator(character);
