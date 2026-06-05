@@ -14,8 +14,6 @@
  * https://refactoring.guru/es/design-patterns/template-method
  */
 
-import { COLORS } from '../helpers/colors.ts';
-
 /**
  * Contexto: Vamos a implementar un sistema que permite preparar
  * diferentes bebidas calientes, como café y té.
@@ -29,7 +27,10 @@ import { COLORS } from '../helpers/colors.ts';
  * y delega los detalles específicos a las subclases.
  */
 
+import { COLORS } from "../helpers/index.ts";
+
 abstract class HotBeverage {
+
   prepare(): void {
     this.boilWater();
     this.addMainIngredient();
@@ -37,46 +38,56 @@ abstract class HotBeverage {
     this.addCondiments();
   }
 
-  private boilWater() {
-    console.log('Hirviendo agua...');
+  private boilWater(): void {
+    console.log('Herviendo el agua...');
   }
 
-  private pourInCup() {
-    console.log('Sirviendo en la taza...');
+  private pourInCup(): void {
+    console.log('Sirviendo la bebida en la taza...');
   }
 
   protected abstract addMainIngredient(): void;
+
   protected abstract addCondiments(): void;
+
 }
 
 class Tea extends HotBeverage {
-  protected override addMainIngredient(): void {
-    console.log('Añadiendo una bolsa de té');
+
+  protected addMainIngredient(): void {
+    console.log('Añadiendo la bolsita de té...')
   }
 
-  protected override addCondiments(): void {
-    console.log('Añadiendo miel y limón');
+  protected addCondiments(): void {
+    console.log('Añadiendo miel y limón...')
   }
+
 }
 
 class Coffee extends HotBeverage {
-  protected override addMainIngredient(): void {
-    console.log('Añadiendo café molido');
+
+  protected addMainIngredient(): void {
+    console.log('Añadiendo el café molido...');
   }
 
-  protected override addCondiments(): void {
-    console.log('Añadiendo azúcar y leche');
+  protected addCondiments(): void {
+    console.log('Añadiendo azúcar y leche...');
   }
+
 }
 
 function main() {
-  console.log('%cPreparando el té', COLORS.green);
+
+  console.log(`%cPreparando el té`, COLORS.green);
   const tea = new Tea();
   tea.prepare();
 
-  console.log('\n%cPreparando café', COLORS.brown);
+  console.log(`\n`);
+  console.log(`%cPreparando el café`, COLORS.brown);
   const coffee = new Coffee();
   coffee.prepare();
+
 }
 
 main();
+

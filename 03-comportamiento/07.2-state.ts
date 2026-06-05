@@ -32,15 +32,11 @@ interface State {
 
 // Clase Context - AutomaticDoor
 class AutomaticDoor {
+
   private state: State;
 
   constructor() {
     this.state = new Closed(this);
-  }
-
-  setState(state: State): void {
-    this.state = state;
-    console.log(`%cEstado cambiado a: ${state.name}`, COLORS.green);
   }
 
   open(): void {
@@ -51,19 +47,25 @@ class AutomaticDoor {
     this.state.close();
   }
 
+  setState(state: State): void {
+    this.state = state;
+    console.log(`%cEstado cambiado a: ${state.name}`, COLORS.green);
+  }
+
   getStateName(): string {
     return this.state.name;
   }
+
 }
 
 // Estado 1 - Cerrada
 class Closed implements State {
+
+  public name: string = 'closed';
   private door: AutomaticDoor;
-  public name: string;
 
   constructor(door: AutomaticDoor) {
     this.door = door;
-    this.name = 'Cerrada';
   }
 
   open(): void {
@@ -74,23 +76,23 @@ class Closed implements State {
   close(): void {
     console.log('La puerta ya está cerrada.');
   }
+
 }
 
 // Estado 2 - Abriéndose
 class Opening implements State {
-  public name: string;
+
+  public name: string = 'opening';
   private door: AutomaticDoor;
 
   constructor(door: AutomaticDoor) {
-    //TODO: asignar door y name = Abriendo
     this.door = door;
-    this.name = 'Abriendo...';
-
     this.afterOpen();
   }
 
   private async afterOpen() {
-    await sleep(3000);
+
+    await sleep(2000);
 
     console.log('La puerta se ha abierto.');
     this.door.setState(new Open(this.door));
@@ -103,15 +105,16 @@ class Opening implements State {
   close(): void {
     console.log('La puerta no puede cerrarse mientras se abre.');
   }
+
 }
 
 // Estado 3 - Abierta
 class Open implements State {
+
+  public name: string = 'open';
   private door: AutomaticDoor;
-  public name: string;
 
   constructor(door: AutomaticDoor) {
-    this.name = 'Abierta';
     this.door = door;
   }
 
@@ -123,36 +126,37 @@ class Open implements State {
     console.log('Cerrando la puerta...');
     this.door.setState(new Closing(this.door));
   }
+
 }
 
 // Estado 4 - Cerrándose
 class Closing implements State {
+
+  public name: string = 'closing';
   private door: AutomaticDoor;
-  public name: string;
 
   constructor(door: AutomaticDoor) {
     this.door = door;
-    this.name = 'Cerrándose';
-
-    this.afterClosed();
+    this.afterClose();
   }
 
-  private async afterClosed() {
-    await sleep(3000);
+  private async afterClose() {
+
+    await sleep(2000);
 
     console.log('La puerta se ha cerrado.');
     this.door.setState(new Closed(this.door));
+
   }
 
   open(): void {
-    console.log('Detectando movimiento. Abriendo la puerta nuevamente...');
-    this.door.setState(new Opening(this.door));
+    console.log('%cLa puerta no se puede abrir mientras se está cerrando.', COLORS.red);
   }
 
   close(): void {
-    console.log('La puerta se ha cerrado.');
-    this.door.setState(new Closed(this.door));
+    console.log('%cLa puerta ya se está cerrando.', COLORS.red);
   }
+
 }
 
 // Código Cliente para probar el patrón State
@@ -163,13 +167,15 @@ async function main() {
 
   do {
     console.clear();
+
     console.log(`Estado actual: ${door.getStateName()}`);
+
     selectedOption = prompt(`
       1. Abrir puerta
       2. Cerrar puerta
       3. Salir
 
-      Selecciona una opción: 
+      Selecciona una opción:
     `);
 
     switch (selectedOption) {
@@ -180,14 +186,17 @@ async function main() {
         door.close();
         break;
       case '3':
-        console.log('Saliendo del simulador...');
+        console.log(`Estado actual: ${door.getStateName()}`);
         break;
+
       default:
         console.log('Opción no válida.');
         break;
     }
 
-    await sleep(2000);
+    await sleep(3000);
+
+
   } while (selectedOption !== '3');
 }
 

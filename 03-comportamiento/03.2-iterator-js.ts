@@ -42,6 +42,7 @@ class PokemonCollection {
   *[Symbol.iterator](): IterableIterator<Pokemon> {
     yield* this.pokemons;
   }
+
 }
 
 // Código Cliente para probar el iterador con función generadora

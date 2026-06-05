@@ -24,40 +24,45 @@ interface Observer {
 // Clase Subject - WeatherStation
 // TODO: Terminal la implementación
 class WeatherStation {
+
   private observers: Observer[] = [];
-  private weatherData: string = 'Soleado';
+  private weatherData: string = 'soleado';
 
   // Agregar un Observer
   subscribe(observer: Observer): void {
+
     this.observers.push(observer);
-    observer.update(this.weatherData);
 
     console.log(
       '%cNueva aplicación suscrita al sistema meteorológico.',
       COLORS.green
     );
+
   }
 
   // Eliminar un Observer
   unsubscribe(observer: Observer): void {
-    this.observers = this.observers.filter((sub) => sub !== observer);
+    this.observers = this.observers.filter(obs => obs !== observer);
     console.log(`%cUna aplicación se ha dado de baja`, COLORS.red);
   }
 
   // Actualizar el clima y notificar a todos los Observers
   setWeather(weatherData: string): void {
     console.log(`\nClima actualizado: %c${weatherData}`, COLORS.blue);
-
     this.weatherData = weatherData;
     this.notifyObservers();
   }
 
   // Notificar a todos los Observers
   private notifyObservers(): void {
+
     for (const observer of this.observers) {
       observer.update(this.weatherData);
+      console.log(`%cNotificando a una aplicación...`, COLORS.yellow);
     }
+
   }
+
 }
 
 // Clase Observer - WeatherApp

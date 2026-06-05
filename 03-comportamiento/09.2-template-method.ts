@@ -15,17 +15,17 @@
  */
 
 /**
- * !Objetivo: 
- * Implementar el patrón Template Method para simular un sistema de limpieza 
- * de diferentes tipos de habitaciones 
- * (por ejemplo, una habitación de hotel y una sala de conferencias). 
- * 
- * Debes diseñar una clase base que defina el flujo general de limpieza 
- * y subclases que implementen pasos específicos dependiendo del tipo 
+ * !Objetivo:
+ * Implementar el patrón Template Method para simular un sistema de limpieza
+ * de diferentes tipos de habitaciones
+ * (por ejemplo, una habitación de hotel y una sala de conferencias).
+ *
+ * Debes diseñar una clase base que defina el flujo general de limpieza
+ * y subclases que implementen pasos específicos dependiendo del tipo
  * de habitación.
- * 
- * 
- * 
+ *
+ *
+ *
  * ! Descripción del Ejercicio
   El proceso de limpieza general incluye los siguientes pasos:
     1.	Entrar a la habitación: Abrir la puerta y entrar.
@@ -70,7 +70,11 @@ abstract class RoomCleaning {
     console.log('Saliendo de la habitación y marcándola como limpia.');
   }
 
+  // Método abstracto para limpieza específica
+  // TODO: Implementar el método specificCleaning en las subclases
+  // protected abstract? ambas?
   protected abstract specificCleaning(): void;
+
 }
 
 // Subclase - HotelRoomCleaning

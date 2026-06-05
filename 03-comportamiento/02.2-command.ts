@@ -69,37 +69,42 @@ class TextEditor {
 class CopyCommand implements Command {
   private editor: TextEditor;
 
-  constructor(textEditor: TextEditor) {
-    this.editor = textEditor;
+  constructor(editor: TextEditor) {
+    this.editor = editor;
   }
 
   execute(): void {
     this.editor.copy();
   }
+
 }
 
 class PasteCommand implements Command {
+
   private editor: TextEditor;
 
-  constructor(textEditor: TextEditor) {
-    this.editor = textEditor;
+  constructor(editor: TextEditor) {
+    this.editor = editor;
   }
 
   execute(): void {
     this.editor.paste();
   }
+
 }
 
 class UndoCommand implements Command {
+
   private editor: TextEditor;
 
-  constructor(textEditor: TextEditor) {
-    this.editor = textEditor;
+  constructor(editor: TextEditor) {
+    this.editor = editor;
   }
 
   execute(): void {
     this.editor.undo();
   }
+
 }
 
 // 4. Clase Cliente - Toolbar
@@ -112,12 +117,16 @@ class Toolbar {
   }
 
   clickButton(button: string): void {
-    if (this.commands[button]) {
-      this.commands[button].execute();
+
+    const command = this.commands[button];
+
+    if (command) {
+      command.execute();
       return;
     }
 
     console.error(`No hay un comando asignado al botón "${button}"`);
+
   }
 }
 

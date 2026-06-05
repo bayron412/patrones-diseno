@@ -59,13 +59,11 @@ class History {
   private mementos: DrawingMemento[] = [];
 
   // Guardar un Memento
-  // TODO: Implementar push para guardar en la historia
   push(memento: DrawingMemento): void {
     this.mementos.push(memento);
   }
 
   // Recuperar el último Memento
-  // TODO: Implementar pop para recuperar el último memento
   pop(): DrawingMemento | undefined {
     return this.mementos.pop();
   }
@@ -94,9 +92,6 @@ function main(): void {
   // Deshacer otro cambio
   drawingBoard.restore(history.pop()!);
   drawingBoard.showBoard(); // Mostrar estado después de deshacer nuevamente
-
-  // drawingBoard.restore(history.pop()!);
-  // drawingBoard.showBoard(); // Mostrar estado después de deshacer nuevamente
 }
 
 main();

@@ -10,10 +10,10 @@
  * https://refactoring.guru/es/design-patterns/mediator
  */
 
-import { COLORS } from '../helpers/colors.ts';
+import { COLORS } from "../helpers/colors.ts";
 
-// Chatroom
 class ChatRoom {
+
   private users: User[] = [];
   public title: string;
 
@@ -21,63 +21,59 @@ class ChatRoom {
     this.title = title;
   }
 
-  addUser(user: User) {
+  addUser(user: User): void {
     this.users.push(user);
   }
 
   sendMessage(sender: User, message: string): void {
-    const usersToSend = this.users.filter((user) => user !== sender);
+
+    const usersToSend = this.users.filter(user => user !== sender);
 
     for (const user of usersToSend) {
       user.receiveMessage(sender, message);
-      // if (user !== sender) {
-      // user.receiveMessage(sender, message)
-      // }
     }
+
   }
+
 }
 
 class User {
+
   private username: string;
   private chatRoom: ChatRoom;
 
-  constructor(username: string, chatroom: ChatRoom) {
+  constructor(username: string, chatRoom: ChatRoom) {
     this.username = username;
-    this.chatRoom = chatroom;
+    this.chatRoom = chatRoom;
 
-    chatroom.addUser(this);
+    this.chatRoom.addUser(this);
   }
 
   sendMessage(message: string): void {
-    console.log(
-      `\n\n\n%c${this.username} envía: %c${message} `,
-      COLORS.blue,
-      COLORS.white
-    );
+    console.log(`\n\n%c${this.username} sends: %c${message}`, COLORS.blue, COLORS.white);
     this.chatRoom.sendMessage(this, message);
   }
 
   receiveMessage(sender: User, message: string): void {
-    console.log(
-      `%c${this.username} recibe de ${sender.username}: %c${message} `,
-      COLORS.blue,
-      COLORS.white
-    );
+    console.log(`%c${this.username} receives from ${sender.username}: %c${message}`, COLORS.green, COLORS.white);
   }
+
 }
 
 function main() {
-  const chatRoom = new ChatRoom('Grupo de trabajo');
 
-  const user1 = new User('Fernando', chatRoom);
-  const user2 = new User('Gastón', chatRoom);
-  const user3 = new User('Mariangel', chatRoom);
+  const chatRoom = new ChatRoom("General");
 
-  user1.sendMessage('Hola a todos!');
-  user2.sendMessage('Hola Fernando, ¿Cómo estás?');
-  user3.sendMessage('Hola Fernando, Gastón, ¿Cómo están?');
+  const user1 = new User("user1", chatRoom);
+  const user2   = new User("user2", chatRoom);
+  const user3 = new User("user3", chatRoom);
+
+  user1.sendMessage("Hola a todos!");
+  user2.sendMessage("¡Hola user1! ¿Cómo estás?");
+  user3.sendMessage("¡Hola user1 y user2! ¿Qué tal?");
 
   console.log('\n\n');
+
 }
 
 main();

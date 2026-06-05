@@ -1,5 +1,5 @@
 /**
- * ! Patrón Chain of Responsibility
+ * ! Patron Chain of Responsibility
  * Es un patrón de diseño de comportamiento que te permite pasar solicitudes
  * a lo largo de una cadena de manejadores.
  *
@@ -18,6 +18,7 @@ interface Handler {
 }
 
 abstract class BaseHandler implements Handler {
+
   private nextHandler?: Handler;
 
   setNext(handler: Handler): Handler {
@@ -26,74 +27,90 @@ abstract class BaseHandler implements Handler {
   }
 
   handle(request: string): void {
-    if (this.nextHandler) {
+    if(this.nextHandler){
       this.nextHandler.handle(request);
     }
   }
+
 }
 
-// Soporte básico
+// Soporte Basico
 class BasicSupport extends BaseHandler {
-  override handle(request: string): void {
-    if (request === 'básico') {
-      console.log(
-        'Soporte básico: %cResolviendo problema básico',
-        COLORS.green
-      );
+
+  override handle(request: string) {
+
+    if (request === 'basic') {
+      console.log('%cBasic Support: Resolved Basic Request', COLORS.green);
       return;
     }
+    else {
+      console.log('%cBasic Support: Need Escalated Support to Advanced Support', COLORS.red);
+      super.handle(request);
+    }
 
-    console.log('Soporte básico: Pasando el problema a soporte avanzado');
-    super.handle(request);
   }
+
 }
 
-class AdvancedSupport extends BaseHandler {
-  override handle(request: string): void {
-    if (request === 'avanzado') {
-      console.log(
-        'Soporte avanzado: %cResolviendo problema avanzado',
-        COLORS.yellow
-      );
+class AdvanceSupport extends BaseHandler {
+
+  override handle(request: string) {
+
+    if (request === 'advanced') {
+      console.log('%cAdvance Support: Resolved Advanced Request', COLORS.green);
       return;
     }
+    else {
+      console.log('%cAdvance Support: Need Escalated Support to Expert Support', COLORS.red);
+      super.handle(request);
+    }
 
-    console.log(
-      'Soporte avanzado: %cPasando el problema a soporte experto',
-      COLORS.purple
-    );
-    super.handle(request);
   }
+
 }
 
 class ExpertSupport extends BaseHandler {
-  override handle(request: string): void {
-    if (request === 'experto') {
-      console.log(
-        'Soporte experto: %cResolviendo problema experto',
-        COLORS.yellow
-      );
+
+  override handle(request: string) {
+
+    if (request === 'expert') {
+      console.log('%cExpert Support: Resolved Expert Request', COLORS.green);
       return;
     }
+    else {
+      console.log('%cExpert Support: Cannot Resolve Request', COLORS.red);
+    }
 
-    console.log(
-      '%cSoporte experto: No hay nada que hacer... bye bye',
-      COLORS.red
-    );
   }
+
 }
 
-function main() {
+function main () {
+
   const basicSupport = new BasicSupport();
-  const advancedSupport = new AdvancedSupport();
+  const advanceSupport = new AdvanceSupport();
   const expertSupport = new ExpertSupport();
 
-  basicSupport.setNext(advancedSupport).setNext(expertSupport);
+  basicSupport.setNext(advanceSupport).setNext(expertSupport);
 
-  basicSupport.handle('básico');
-  basicSupport.handle('avanzado');
-  basicSupport.handle('experto');
-  basicSupport.handle('nuclear');
+  console.log('%c=== Chain of Responsibility Demo ===', COLORS.cyan);
+
+  console.log('\n');
+  console.log('%c   call support level 1   ', COLORS.yellow);
+  basicSupport.handle('basic');
+
+  console.log('\n');
+  console.log('%c   call support level 2   ', COLORS.yellow);
+  basicSupport.handle('advanced');
+
+  console.log('\n');
+  console.log('%c   call support level 3   ', COLORS.yellow);
+  basicSupport.handle('expert');
+
+  console.log('\n');
+  console.log('%c   call unknown support   ', COLORS.yellow);
+  basicSupport.handle('unknown');
+
 }
 
 main();

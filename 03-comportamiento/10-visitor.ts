@@ -11,8 +11,6 @@
  * https://refactoring.guru/es/design-patterns/visitor
  */
 
-import { COLORS } from '../helpers/colors.ts';
-
 /**
  * Contexto: Imagina que estás diseñando un sistema para un parque
  * temático con diferentes tipos de atracciones:
@@ -27,6 +25,8 @@ import { COLORS } from '../helpers/colors.ts';
  * sin modificar las clases originales.
  */
 
+import {COLORS} from '../helpers/index.ts'
+
 interface Visitor {
   visitRollerCoaster(rollerCoaster: RollerCoaster): void;
   visitHauntedHouse(hauntedHouse: HauntedHouse): void;
@@ -35,11 +35,18 @@ interface Visitor {
 
 interface Attraction {
   accept(visitor: Visitor): void;
+  getName(): string;
   getPrice(): number;
 }
 
 class RollerCoaster implements Attraction {
+
+  private name: string = 'Montaña Rusa';
   private price: number = 50;
+
+  getName(): string {
+    return this.name;
+  }
 
   getPrice(): number {
     return this.price;
@@ -48,10 +55,17 @@ class RollerCoaster implements Attraction {
   accept(visitor: Visitor): void {
     visitor.visitRollerCoaster(this);
   }
+
 }
 
 class HauntedHouse implements Attraction {
+
+  private name: string = 'Casa del Terror';
   private price: number = 40;
+
+  getName(): string {
+    return this.name;
+  }
 
   getPrice(): number {
     return this.price;
@@ -60,10 +74,17 @@ class HauntedHouse implements Attraction {
   accept(visitor: Visitor): void {
     visitor.visitHauntedHouse(this);
   }
+
 }
 
 class FerrisWheel implements Attraction {
+
+  private name: string = 'Rueda de la Fortuna';
   private price: number = 30;
+
+  getName(): string {
+    return this.name;
+  }
 
   getPrice(): number {
     return this.price;
@@ -72,106 +93,113 @@ class FerrisWheel implements Attraction {
   accept(visitor: Visitor): void {
     visitor.visitFerrisWheel(this);
   }
+
 }
 
 // Visitors
 class ChildVisitor implements Visitor {
+
   visitRollerCoaster(rollerCoaster: RollerCoaster): void {
-    console.log(
-      `Niño en Montaña Rusa: Precio con descuento de $${
-        rollerCoaster.getPrice() * 0.5
-      }`
-    );
+    console.log(`
+      Visitando: Montaña Rusa (Niño):
+      Tiene un precio con descuento $${rollerCoaster.getPrice() * 0.5}
+    `);
   }
 
   visitHauntedHouse(hauntedHouse: HauntedHouse): void {
-    console.log(
-      `Niño en Casa del Terror: Precio con descuento de $${
-        hauntedHouse.getPrice() * 0.7
-      }`
-    );
+    console.log(`
+      Visitando: Casa del Terror (Niño):
+      Tiene un precio con descuento $${hauntedHouse.getPrice() * 0.7}
+    `);
   }
 
   visitFerrisWheel(ferrisWheel: FerrisWheel): void {
-    console.log(
-      `Niño en la Rueda de la Fortuna: Precio con descuento de $${
-        ferrisWheel.getPrice() * 0.6
-      }`
-    );
+    console.log(`
+      Visitando: Rueda de la Fortuna (Niño):
+      Tiene un precio con descuento $${ferrisWheel.getPrice() * 0.6}
+    `);
   }
+
 }
 
 class AdultVisitor implements Visitor {
+
   visitRollerCoaster(rollerCoaster: RollerCoaster): void {
-    console.log(
-      `Adulto en Montaña Rusa: Precio con descuento de $${rollerCoaster.getPrice()}`
-    );
+    console.log(`
+      Visitando: Montaña Rusa (Adulto):
+      Tiene un precio normal $${rollerCoaster.getPrice()}
+    `);
   }
 
   visitHauntedHouse(hauntedHouse: HauntedHouse): void {
-    console.log(
-      `Adulto en Casa del Terror: Precio con descuento de $${hauntedHouse.getPrice()}`
-    );
+    console.log(`
+      Visitando: Casa del Terror (Adulto):
+      Tiene un precio normal $${hauntedHouse.getPrice()}
+    `);
   }
 
   visitFerrisWheel(ferrisWheel: FerrisWheel): void {
-    console.log(
-      `Adulto en la Rueda de la Fortuna: Precio con descuento de $${ferrisWheel.getPrice()}`
-    );
+    console.log(`
+      Visitando: Rueda de la Fortuna (Adulto):
+      Tiene un precio normal $${ferrisWheel.getPrice()}
+    `);
   }
+
 }
 
-class SeniorVisitor implements Visitor {
+class ElderVisitor implements Visitor {
+
   visitRollerCoaster(rollerCoaster: RollerCoaster): void {
-    console.log(
-      `Adulto en Montaña Rusa: Precio con descuento de $${
-        rollerCoaster.getPrice() * 0.85
-      }`
-    );
+    console.log(`
+      Visitando: Montaña Rusa (Adulto Mayor):
+      Tiene un precio con descuento $${rollerCoaster.getPrice() * 0.8}
+    `);
   }
 
   visitHauntedHouse(hauntedHouse: HauntedHouse): void {
-    console.log(
-      `Adulto en Casa del Terror: Precio con descuento de $${
-        hauntedHouse.getPrice() * 0.85
-      }`
-    );
+    console.log(`
+      Visitando: Casa del Terror (Adulto Mayor):
+      Tiene un precio con descuento $${hauntedHouse.getPrice() * 0.9}
+    `);
   }
 
   visitFerrisWheel(ferrisWheel: FerrisWheel): void {
-    console.log(
-      `Adulto en la Rueda de la Fortuna: Precio con descuento de $${
-        ferrisWheel.getPrice() * 0.85
-      }`
-    );
+    console.log(`
+      Visitando: Rueda de la Fortuna (Adulto Mayor):
+      Tiene un precio con descuento $${ferrisWheel.getPrice() * 0.6}
+    `);
   }
+
 }
 
 function main() {
+
   const attractions: Attraction[] = [
     new RollerCoaster(),
     new HauntedHouse(),
     new FerrisWheel(),
   ];
 
-  console.log(`Montaña Rusa: ${new RollerCoaster().getPrice()}`);
-  console.log(`Casa del Terror: ${new HauntedHouse().getPrice()}`);
-  console.log(`La Rueda de la fortuna: ${new FerrisWheel().getPrice()}`);
-  console.log('\n\n');
+  attractions.forEach(a => console.log(`%cAtraccion: ${a.getName()} - $${a.getPrice()}`, COLORS.yellow));
 
-  console.log('\n%cVisitante Niño', COLORS.green);
+  console.log('\n')
+  console.log(`%c Visitante Niño:`, COLORS.green)
+
   const childVisitor = new ChildVisitor();
-  attractions.forEach((attraction) => attraction.accept(childVisitor));
+  attractions.forEach(a => a.accept(childVisitor));
 
-  console.log('\n%cVisitante Adulto', COLORS.purple);
+  console.log('\n')
+  console.log(`%c Visitante Adulto:`, COLORS.cyan)
+
   const adultVisitor = new AdultVisitor();
-  attractions.forEach((attraction) => attraction.accept(adultVisitor));
+  attractions.forEach(a => a.accept(adultVisitor));
 
-  console.log('\n%cVisitante Adulto Mayor', COLORS.purple);
-  const seniorVisitor = new SeniorVisitor();
-  attractions.forEach((attraction) => attraction.accept(seniorVisitor));
+  console.log('\n')
+  console.log(`%c Visitante Adulto Mayor:`, COLORS.blue)
 
-  console.log('\n\n');
+  const elderVisitor = new ElderVisitor();
+  attractions.forEach(a => a.accept(elderVisitor));
+
 }
 
 main();

@@ -13,31 +13,31 @@
  */
 
 /**
- * !Objetivo: 
+ * !Objetivo:
  * Implementar el patrón Strategy para calcular los impuestos de diferentes países.
- * 
+ *
  * !Descripción del Ejercicio
 
-  Imagina que trabajas en una plataforma de comercio electrónico que opera en varios países. 
-  Cada país tiene su propio método para calcular impuestos, 
+  Imagina que trabajas en una plataforma de comercio electrónico que opera en varios países.
+  Cada país tiene su propio método para calcular impuestos,
   y necesitas implementar un sistema que sea:
 
-    1. Flexible: Permita agregar nuevos cálculos de impuestos 
+    1. Flexible: Permita agregar nuevos cálculos de impuestos
        sin modificar la lógica existente.
-    2. Dinámico: Cambie la estrategia de cálculo de impuestos en tiempo 
+    2. Dinámico: Cambie la estrategia de cálculo de impuestos en tiempo
        de ejecución según el país seleccionado.
  */
 
-/**	
-    1.	Implementar una interfaz TaxStrategy que defina un método 
+/**
+    1.	Implementar una interfaz TaxStrategy que defina un método
         calculateTax(amount: number): number.
-        
+
     2.	Crear clases específicas de estrategia para los países disponibles:
       •	USA: Impuesto del 10%.
       •	Canada: Impuesto del 13%.
       •	Germany: Impuesto del 19%.
-      
-    3.	Implementar una clase TaxCalculator que utilice las estrategias 
+
+    3.	Implementar una clase TaxCalculator que utilice las estrategias
         para calcular los impuestos.
  */
 
@@ -71,10 +71,10 @@ class GermanyTaxStrategy implements TaxStrategy {
 
 // Clase Contexto - TaxCalculator
 class TaxCalculator {
+
   private strategy: TaxStrategy;
 
-  // TODO: Implementar el constructor recibiendo la estrategia a usar
-  constructor(strategy: TaxStrategy) {
+  constructor(strategy: TaxStrategy){
     this.strategy = strategy;
   }
 
@@ -91,6 +91,7 @@ class TaxCalculator {
 
 // Código Cliente para probar
 function main(): void {
+
   const taxCalculator = new TaxCalculator(new USATaxStrategy());
 
   console.log('%cCálculo de impuestos:\n', COLORS.red);
@@ -103,6 +104,7 @@ function main(): void {
   console.log('\nCambiando a estrategia para Germany...');
   taxCalculator.setStrategy(new GermanyTaxStrategy());
   console.log('Germany: $', taxCalculator.calculate(100).toFixed(2));
+
 }
 
 main();

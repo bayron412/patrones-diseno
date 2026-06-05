@@ -10,6 +10,7 @@
  * * Es útil cuando se necesita desacoplar el objeto que invoca
  * * la operación del objeto que sabe cómo realizarla.
  *
+ *
  */
 
 import { COLORS } from '../helpers/colors.ts';
@@ -19,89 +20,107 @@ interface Command {
 }
 
 class Light {
-  turnOn(): void {
-    console.log('%cLa luz está encendida', COLORS.yellow);
+
+  turnOn() {
+    console.log('%cLight: Turned On', COLORS.yellow);
   }
 
-  turnOff(): void {
-    console.log('%cLa luz está apagada', COLORS.yellow);
+  turnOff() {
+    console.log('%cLight: Turned Off', COLORS.yellow);
   }
+
 }
 
 class Fan {
-  on(): void {
-    console.log('%cEl ventilador está encendido', COLORS.green);
+
+  on() {
+    console.log('%cFan: Turned On', COLORS.green);
   }
 
-  off(): void {
-    console.log('%cEl ventilador está apagado', COLORS.green);
+  off() {
+    console.log('%cFan: Turned Off', COLORS.green);
   }
+
 }
 
-// Comandos
-
+// comando para encender la luz
 class LightOnCommand implements Command {
+
   constructor(private light: Light) {}
 
   execute(): void {
     this.light.turnOn();
   }
+
 }
 
 class LightOffCommand implements Command {
+
   constructor(private light: Light) {}
 
   execute(): void {
     this.light.turnOff();
   }
+
 }
 
+// comando para encender el ventilador
 class FanOnCommand implements Command {
+
   constructor(private fan: Fan) {}
 
   execute(): void {
     this.fan.on();
   }
+
 }
 
 class FanOffCommand implements Command {
+
   constructor(private fan: Fan) {}
 
   execute(): void {
     this.fan.off();
   }
+
 }
 
 class RemoteControl {
+
   private commands: Record<string, Command> = {};
 
   setCommand(button: string, command: Command) {
     this.commands[button] = command;
   }
 
-  pressButton(button: string): void {
-    if (this.commands[button]) {
-      this.commands[button].execute();
-      return;
+  pressButton(button: string) {
+
+    const command = this.commands[button];
+
+    if (command) {
+      command.execute();
+    }
+    else {
+      console.log(`No command assigned to button ${button}`, COLORS.red);
     }
 
-    console.log('%cNo se ha asignado un comando a ese botón', COLORS.red);
   }
+
 }
 
 function main() {
+
   const remoteControl = new RemoteControl();
+
   const light = new Light();
   const fan = new Fan();
 
-  // Crear los comandos para los dispositivos
   const lightOnCommand = new LightOnCommand(light);
   const lightOffCommand = new LightOffCommand(light);
 
   const fanOnCommand = new FanOnCommand(fan);
   const fanOffCommand = new FanOffCommand(fan);
 
-  // Asignar las acciones al el control remoto
   remoteControl.setCommand('1', lightOnCommand);
   remoteControl.setCommand('2', lightOffCommand);
   remoteControl.setCommand('3', fanOnCommand);
@@ -110,27 +129,27 @@ function main() {
   let continueProgram = true;
 
   do {
+
+    const pressedButton = prompt(`
+      press button:
+      1: Light On
+      2: Light Off
+      3: Fan On
+      4: Fan Off
+      q: Quit
+    `) ?? '';
+
     console.clear();
-    const pressedButton =
-      prompt(
-        `Presiona un botón del control:
-        1. Encender luz
-        2. Apagar luz
-        3. Encender ventilador
-        4. Apagar ventilador
 
-        Botón: 
-      `
-      ) ?? '';
+    if (pressedButton === 'q') {
+      continueProgram = false;
+    }
+    else {
+      remoteControl.pressButton(pressedButton || '');
+    }
 
-    remoteControl.pressButton(pressedButton);
-
-    const continueProgramResponse = prompt(
-      `\n¿Deseas continuar? (y/n):`
-    )?.toLowerCase();
-
-    continueProgram = continueProgramResponse === 'n' ? false : true;
   } while (continueProgram);
+
 }
 
 main();

@@ -4,7 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="0b7f7fe0-9f70-4308-a28d-b3131c52946a" name="Changes" comment="" />
+    <list default="true" id="0b7f7fe0-9f70-4308-a28d-b3131c52946a" name="Changes" comment="02-estructurales">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/01-chain-responsibility.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/01-chain-responsibility.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/01.2-chain-responsibility.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/01.2-chain-responsibility.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/02-command.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/02-command.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/02.2-command.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/02.2-command.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/03-iterator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/03-iterator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/03.2-iterator-js.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/03.2-iterator-js.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/03.3-iterator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/03.3-iterator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/04-mediator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/04-mediator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/04.2-mediator.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/04.2-mediator.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/05-memento.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/05-memento.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/05.2-memento.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/05.2-memento.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/06-observer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/06-observer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/06.2-observer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/06.2-observer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/07-state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/07-state.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/07.2-state.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/07.2-state.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/08-strategy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/08-strategy.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/08.2-strategy.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/08.2-strategy.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/09-template-method.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/09-template-method.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/09.2-template-method.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/09.2-template-method.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/10-visitor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/10-visitor.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/03-comportamiento/10.2-visitor.ts" beforeDir="false" afterPath="$PROJECT_DIR$/03-comportamiento/10.2-visitor.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,33 +62,46 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Git.Working.Tree.Tab.closed.by.user": "closed",
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "Node.js.01.2-builder.ts.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
-    "codeWithMe.voiceChat.enabledByDefault": "false",
-    "javascript.preferred.runtime.type.id": "node",
-    "last_opened_file_path": "/Users/bayrongiraldo/All/sourceCode/patrones-diseno",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "ts.external.directory.path": "/Users/bayrongiraldo/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Git.Working.Tree.Tab.closed.by.user&quot;: &quot;closed&quot;,
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;Node.js.01.2-builder.ts.executor&quot;: &quot;Run&quot;,
+    &quot;Node.js.05-memento.ts.executor&quot;: &quot;Debug&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.typescript.service.memoryLimit.init&quot;: &quot;true&quot;,
+    &quot;codeWithMe.voiceChat.enabledByDefault&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;03-comportamiento-inicio&quot;,
+    &quot;git.auto.fetch.suggestion.counter&quot;: &quot;2&quot;,
+    &quot;javascript.preferred.runtime.type.id&quot;: &quot;node&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/bayrongiraldo/All/sourceCode/patrones-diseno&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/Users/bayrongiraldo/Applications/WebStorm.app/Contents/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
-  <component name="RunManager">
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/03-comportamiento" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Node.js.05-memento.ts">
     <configuration name="01.2-builder.ts" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/01-creacionales/01.2-builder.ts" typescript-loader="bundled" working-dir="$PROJECT_DIR$/01-creacionales">
+      <method v="2" />
+    </configuration>
+    <configuration name="05-memento.ts" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/03-comportamiento/05-memento.ts" typescript-loader="bundled" working-dir="$PROJECT_DIR$/03-comportamiento">
       <method v="2" />
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Node.js.05-memento.ts" />
+        <item itemvalue="Node.js.01.2-builder.ts" />
         <item itemvalue="Node.js.01.2-builder.ts" />
         <item itemvalue="Node.js.01.2-builder.ts" />
         <item itemvalue="Node.js.01.2-builder.ts" />
@@ -85,6 +121,8 @@
       <workItem from="1779838540167" duration="54000" />
       <workItem from="1779838602737" duration="304000" />
       <workItem from="1779839090769" duration="261000" />
+      <workItem from="1780526065934" duration="142000" />
+      <workItem from="1780526249331" duration="327000" />
     </task>
     <servers />
   </component>
@@ -102,40 +140,8 @@
       </map>
     </option>
   </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/01-creacionales/01.2-builder.ts</url>
-          <line>51</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/01-creacionales/01.2-builder.ts</url>
-          <line>56</line>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/01-creacionales/01.2-builder.ts</url>
-          <line>61</line>
-          <option name="timeStamp" value="3" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/01-creacionales/01.2-builder.ts</url>
-          <line>85</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/01-creacionales/01.2-builder.ts</url>
-          <line>71</line>
-          <option name="timeStamp" value="5" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/01-creacionales/01.2-builder.ts</url>
-          <line>66</line>
-          <option name="timeStamp" value="6" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="02-estructurales" />
+    <option name="LAST_COMMIT_MESSAGE" value="02-estructurales" />
   </component>
 </project>

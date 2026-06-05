@@ -112,59 +112,66 @@ class Truck implements Vehicle {
 
 // Clase visitante - MaintenanceCostVisitor
 class MaintenanceCostVisitor implements Visitor {
+
   visitCar(car: Car): void {
-    const cost = car.getKilometers() * 0.1 + (2024 - car.getYear()) * 50;
+    const cost = car.getKilometers() * 0.1 + (2026 - car.getYear()) * 50;
 
     console.log(
       `Costo de mantenimiento para el automóvil: $${cost.toFixed(2)}`
     );
+
   }
 
   visitMotorcycle(motorcycle: Motorcycle): void {
-    // TODO: Calcular el costo de mantenimiento para la motocicleta
-    const cost =
-      motorcycle.getKilometers() * 0.05 + (2024 - motorcycle.getYear()) * 30;
+    const cost = motorcycle.getKilometers() * 0.05 + (2026 - motorcycle.getYear()) * 30;
 
     console.log(
       `Costo de mantenimiento para la motocicleta: $${cost.toFixed(2)}`
     );
+
   }
 
   visitTruck(truck: Truck): void {
-    const cost =
-      truck.getKilometers() * 0.15 +
-      truck.getLoadCapacity() * 20 +
-      (2024 - truck.getYear()) * 100;
-
-    console.log(`Costo de mantenimiento para el camión: $${cost.toFixed(2)}`);
+    const cost = truck.getKilometers() * 0.15 + truck.getLoadCapacity() * 20 + (2026 - truck.getYear()) * 100;
+    console.log(
+      `Costo de mantenimiento para el camión: $${cost.toFixed(2)}
+    `);
   }
+
 }
 
 // Clase visitante - EmissionCheckVisitor
 class EmissionCheckVisitor implements Visitor {
+
   visitCar(car: Car): void {
     const passes = car.getYear() > 2000 && car.getKilometers() < 200_000;
-    console.log(`Automóvil cumple con emisiones: ${passes ? 'Sí' : 'No'}`);
+    console.log(`
+      Automóvil cumple con emisiones: ${passes ? 'Sí' : 'No'}
+    `);
   }
 
   visitMotorcycle(motorcycle: Motorcycle): void {
-    const passes =
-      motorcycle.getYear() > 2005 && motorcycle.getKilometers() < 100_000;
-    console.log(`Motocicleta cumple con emisiones: ${passes ? 'Sí' : 'No'}`);
+    const passes = motorcycle.getYear() > 2005 && motorcycle.getKilometers() < 100_000;
+    console.log(`
+      Motocicleta cumple con emisiones: ${passes ? 'Sí' : 'No'}
+    `);
   }
 
   visitTruck(truck: Truck): void {
     const passes = truck.getYear() > 2010 && truck.getKilometers() < 300_000;
-    console.log(`Camión cumple con emisiones: ${passes ? 'Sí' : 'No'}`);
+    console.log(`
+      Camión cumple con emisiones: ${passes ? 'Sí' : 'No'}
+    `);
   }
 }
 
 // ! Código Cliente
+// ! Aquí no deben de haber cambios
 function main(): void {
   const vehicles: Vehicle[] = [
-    new Car(2000, 150_000),
-    new Motorcycle(2015, 30_000),
-    new Truck(2012, 250_000, 20),
+    new Car(2020, 50_000),
+    new Motorcycle(2017, 30_000),
+    new Truck(2014, 250_000, 20),
   ];
 
   console.log('%c\nCalculando costos de mantenimiento:', COLORS.green);

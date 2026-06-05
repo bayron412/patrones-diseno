@@ -18,6 +18,7 @@ interface Approver {
 
 // 2. Clase Abstracta BaseApprover para manejar la cadena
 abstract class BaseApprover implements Approver {
+
   private nextApprover: Approver | null = null;
 
   setNext(approver: Approver): Approver {
@@ -29,61 +30,65 @@ abstract class BaseApprover implements Approver {
   abstract approveRequest(amount: number): void;
 
   protected next(amount: number): void {
+
     if (this.nextApprover) {
       this.nextApprover.approveRequest(amount);
       return;
     }
 
+
     console.log('Solicitud no pudo ser aprobada.');
+
   }
+
 }
 
 // 3. Clases Concretas de Aprobadores
 
 class Supervisor extends BaseApprover {
   override approveRequest(amount: number): void {
+
     if (amount <= 1000) {
-      console.log(
-        `Supervisor aprueba la compra de %c$${amount}`,
-        COLORS.yellow
-      );
+      console.log(`%cSupervisor aprobó la solicitud de ${amount}`, COLORS.green);
       return;
     }
 
+    console.log(`%cSupervisor rechazó la solicitud de ${amount}, pasando al siguiente aprobador`, COLORS.red);
     this.next(amount);
+
   }
 }
 
 class Manager extends BaseApprover {
   override approveRequest(amount: number): void {
+
     if (amount <= 5000) {
-      console.log(
-        `Supervisor aprueba la compra de %c$${amount}`,
-        COLORS.yellow
-      );
+      console.log(`%cManager aprobó la solicitud de ${amount}`, COLORS.green);
       return;
     }
 
+    console.log(`%cManager rechazó la solicitud de ${amount}, pasando al siguiente aprobador`, COLORS.red);
     this.next(amount);
+
   }
 }
 
 class Director extends BaseApprover {
+
   override approveRequest(amount: number): void {
-    console.log(`Director aprueba la compra de %c$${amount}`, COLORS.yellow);
+
+    console.log(`%cDirector aprobó la solicitud de ${amount}`, COLORS.green);
+    return;
+
   }
+
 }
 
 // 4. Código Cliente para probar la cadena de responsabilidad
 
 function main() {
-  // Supervisor: <= 1000
   const supervisor = new Supervisor();
-
-  // Manager: <=5000
   const manager = new Manager();
-
-  // Director puede aprobar todo
   const director = new Director();
 
   // Configurar la cadena de responsabilidad

@@ -21,6 +21,7 @@ interface Observer {
 }
 
 class YouTubeChannel {
+
   private subscribers: Observer[] = [];
   private name: string;
 
@@ -28,73 +29,75 @@ class YouTubeChannel {
     this.name = name;
   }
 
-  subscribe(observer: Observer): void {
+  subscribe(observer: Observer, name: string): void {
     this.subscribers.push(observer);
-    console.log(`Nuevo suscriptor al canal %c${this.name}`, COLORS.green);
+    console.log(`%c${name} Se ha suscrito a ${this.name}`, COLORS.green);
   }
 
-  unsubscribe(observer: Observer): void {
-    this.subscribers = this.subscribers.filter((sub) => sub !== observer);
-    console.log(`Un suscriptor se ha dado de baja "${this.name}"`);
+  unsubscribe(observer: Observer, name: string): void {
+    console.log(`%c${name} Se ha desuscrito de ${this.name}`, COLORS.red);
+    this.subscribers = this.subscribers.filter(sub => sub !== observer);
   }
 
   uploadVideo(videoTitle: string): void {
-    console.log(
-      `Canal ${this.name} ha subido un nuevo video %c${videoTitle}`,
-      COLORS.green
-    );
+
+    console.log(`%cNuevo video subido a ${this.name}: ${videoTitle}`, COLORS.blue);
 
     for (const subscriber of this.subscribers) {
       subscriber.notify(videoTitle);
     }
+
   }
+
 }
 
 class Subscriber implements Observer {
+
   private name: string;
 
   constructor(name: string) {
     this.name = name;
   }
 
-  notify(videoTitle: string): void {
-    console.log(
-      `%c${this.name} %cha sido notificado: %cNuevo video ${videoTitle}`,
-      COLORS.blue,
-      COLORS.white,
-      COLORS.yellow
-    );
+  getName(): string {
+    return this.name;
   }
+
+  notify(videoTitle: string): void {
+    console.log(`%c${this.name} ha sido notificado de un nuevo video: ${videoTitle}`, COLORS.yellow);
+  }
+
 }
 
 function main() {
-  const channel = new YouTubeChannel('Cocinando con Fernando');
 
-  const melissa = new Subscriber('Melissa');
-  const cesar = new Subscriber('César');
-  const emin = new Subscriber('Emin');
+  const channel = new YouTubeChannel('Tech Reviews');
 
-  channel.subscribe(melissa);
-  channel.subscribe(cesar);
+  const subscriber1 = new Subscriber('Subscriber1');
+  const subscriber2 = new Subscriber('Subscriber2');
+  const subscriber3 = new Subscriber('Subscriber3');
 
-  channel.uploadVideo('Receta de Tamales de Angular');
+  channel.subscribe(subscriber1, subscriber1.getName());
+  channel.subscribe(subscriber2, subscriber2.getName());
 
-  channel.subscribe(emin);
+  console.log('\n');
+  channel.uploadVideo('Review del nuevo smartphone');
 
-  channel.uploadVideo('Receta de React al pastor');
+  channel.subscribe(subscriber3, subscriber3.getName());
 
-  channel.unsubscribe(cesar);
+  console.log('\n');
+  channel.uploadVideo('Comparativa de laptops');
 
-  channel.uploadVideo('Receta de Vue de choclo');
+  console.log('\n');
+  channel.unsubscribe(subscriber1, subscriber1.getName());
 
-  channel.unsubscribe(emin);
+  console.log('\n');
+  channel.uploadVideo('Unboxing de la nueva laptop');
 
-  channel.uploadVideo('Parrillada de NodeJS');
+  console.log('\n');
 
-  channel.unsubscribe(melissa);
-  channel.uploadVideo('Docker a la plancha');
-
-  console.log('\n\n');
 }
 
 main();
+
+
